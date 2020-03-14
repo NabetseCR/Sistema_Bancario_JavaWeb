@@ -417,6 +417,121 @@ ADD COLUMN `porcentaje_interes` DECIMAL(10,3) NOT NULL AFTER `descripcion`;
     /*Llamo procedimiento*/
     CALL insertarCuentaVinculada(4,1);
     
+    /*Insertar deposito*/
+    DELIMITER //
+    CREATE PROCEDURE insertarDeposito(
+		IN _numero_cuenta_destino INT, _monto DECIMAL(65,10), _nombre_persona VARCHAR(45), _primer_apellido_persona VARCHAR(45),
+           _segundo_apellido_persona VARCHAR(45), _motivo VARCHAR(65)
+    )
+    BEGIN
+		INSERT INTO movimiento(`numero_cuenta_destino`, `tipo`, `monto`, `nombre_persona`, `primer_apellido_persona`, `segundo_apellido_persona`, `motivo`, `fecha`) 
+        VALUES(_numero_cuenta_destino, 'Deposito', _monto, _nombre_persona, _primer_apellido_persona, _segundo_apellido_persona, _motivo, CURRENT_DATE());
+    END //
+    DELIMITER ;
+	
+    /*Llamo procedimiento*/
+    CALL insertarDeposito(1, 450.56, 'Miguel', 'Vazquez', 'Coto', 'bicicleta');
+    
+    /*Insertar retiro*/
+    DELIMITER //
+    CREATE PROCEDURE insertarRetiro(
+		IN _numero_cuenta_destino INT, _monto DECIMAL(65,10)
+    )
+    BEGIN
+		INSERT INTO movimiento(`numero_cuenta_destino`, `tipo`, `monto`, `fecha`) 
+        VALUES (_numero_cuenta_destino, 'Retiro', _monto, CURRENT_DATE());
+    END //
+    DELIMITER ;
+	
+    /*Llamo procedimiento*/
+    CALL insertarRetiro(1, 100);
+    
+    /*Insertar Transferencia*/
+    DELIMITER //
+    CREATE PROCEDURE insertarTransferencia(
+		IN _numero_cuenta_origen INT, _numero_cuenta_destino INT, _monto DECIMAL(65,10), _motivo VARCHAR(65)
+    )
+    BEGIN
+		INSERT INTO movimiento(`numero_cuenta_origen`, `numero_cuenta_destino`, `tipo`, `monto`, `motivo`, `fecha`) 
+        VALUES(_numero_cuenta_origen, _numero_cuenta_destino, 'Transferencia', _monto, _motivo, CURRENT_DATE());
+    END //
+    DELIMITER ;
+	
+    /*Llamo procedimiento*/
+    CALL insertarTransferencia(1, 2, 500, 'Carro');
+    
+    /*------------------------------------------------------------------------------------------*/
+    
+    /*Consultas Especificas*/
+    
+    /*saldo cuenta por numero*/
+    DELIMITER //
+    CREATE PROCEDURE saldoCuenta(IN _numero INT)
+    BEGIN
+		SELECT saldo FROM cuenta WHERE numero = _numero;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL saldoCuenta(2);
+    
+    /*busqueda perfil usuario por id*/
+    DELIMITER //
+    CREATE PROCEDURE perfilUsuarioID(IN _id INT)
+    BEGIN
+		SELECT * FROM cuenta_cliente WHERE cedula_cliente_usuario = _id;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL perfilUsuarioID(111);
+    
+    /*busqueda perfil cajero por id*/
+    DELIMITER //
+    CREATE PROCEDURE perfilCajeroID(IN _id INT)
+    BEGIN
+		SELECT * FROM cuenta_cajero WHERE cedula_cajero_usuario = _id;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL perfilCajeroID(222);
+    
+    /*busqueda cambio_valor id moneda*/
+    DELIMITER //
+    CREATE PROCEDURE consultaCambioMoneda(IN _id INT)
+    BEGIN
+		SELECT * FROM cambio_valor WHERE id_moneda = _id;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL consultaCambioMoneda(1);
+    
+    /*modificar monto*/
+    DELIMITER //
+    CREATE PROCEDURE modificarSaldo(IN _numero INT, _saldo DECIMAL(65,10))
+    BEGIN
+		UPDATE cuenta SET saldo = _saldo WHERE  numero = _numero;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL modificarSaldo(1,9999);
+    
+    /*busqueda cuenta_vinculada por destino*/
+    DELIMITER //
+    CREATE PROCEDURE consultaCuentaVinculada(IN destino INT)
+    BEGIN
+		SELECT * FROM cuenta_vinculada WHERE numero_cuenta_objetivo = destino;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL consultaCuentaVinculada(1);
+    
+    /*Falta queries para aplicar los intereses*/
+    
     
     
     
