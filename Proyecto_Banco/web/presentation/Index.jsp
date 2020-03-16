@@ -3,19 +3,19 @@
 <html>
     <head>
         <%@ include file="/presentation/Head.jsp" %>
-        <title>Principal</title> 
+        <title>ICBC</title> 
     </head>
     <body >
         <%@ include file="/presentation/Header.jsp" %>
 
-        <section class="jumbotron jumbotron-ej">
+        <section class="jumbotron">
             <div class="container">
-                <h1>Pepitos Bank
+                <h1>ICBC
                     <a href="#" class="thumb pull-right">
-                        <img src="/Proyecto_Banco/img/Figueres.jpg" alt="">
+                        <img src="/Proyecto_Banco/img/icbc.png" alt="" height="105"width="250">
                     </a>
                 </h1>
-                <p>El Banco de: Me lo comí en confites</p>
+                <p>By your side, as your trust</p>
             </div>
         </section>   
 

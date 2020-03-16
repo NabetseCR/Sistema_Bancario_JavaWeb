@@ -41,13 +41,7 @@
                     <% }%>             
                     </li>
                 </ul>
-                <form action="" class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="from-control" placeholder="Buscar">
-                    </div>
-                    <button type="submit" class="btn btn-primary"><span
-                            class="glyphicon glyphicon-search"></span></button>
-                </form>
+               
             </div>
         </div>
     </nav>  
