@@ -9,6 +9,7 @@ import Bank.data.ClientService;
 import Bank.exceptions.GlobalException;
 import Bank.exceptions.NoDataException;
 import Bank.logic.BankClient;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,9 +17,12 @@ import Bank.logic.BankClient;
  */
 public class Main {
     public static void main(String[] args) throws GlobalException, NoDataException {
-        BankClient client = new BankClient(123,"Juan", "Perez", "Cardozo", "Soltero", "Alajuela", "Alajuela",
-                "150mts sur casa verde", "2345", "5678", "j@perez.com", 33, "clave");
-        ClientService service = new ClientService();
-        service.insertClientToDB(client);
+//        BankClient client = new BankClient(123,"Juan", "Perez", "Cardozo", "Soltero", "Alajuela", "Alajuela",
+//                "150mts sur casa verde", "2345", "5678", "j@perez.com", 33, "clave");
+          ClientService service = new ClientService();
+//        service.insertClientToDB(client);
+          ArrayList<BankClient> ls = service.consultarPersonaID(222);
+          System.out.println(ls.toString());
+          
     }
 }
