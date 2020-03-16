@@ -5,7 +5,6 @@
  */
 package Bank.control;
 
-
 import Bank.logic.Usuario;
 import Bank.model.ModelCuenta;
 import java.io.IOException;
@@ -18,71 +17,69 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet(name = "ClienteCuentaController", urlPatterns = {"/presentation/cliente/cuenta/show"})
 public class ControllerCuenta extends HttpServlet {
-    
-  protected void processRequest(HttpServletRequest request, 
-                                HttpServletResponse response)
-         throws ServletException, IOException {
-           
-        request.setAttribute("model", new ModelCuenta());
-        
-        String viewUrl="";     
-        switch (request.getServletPath()) {
-          case "/presentation/cliente/cuenta/show":
-              viewUrl = this.show(request);
-              break;
-        }          
-        request.getRequestDispatcher(viewUrl).forward( request, response); 
-  }
 
-    public String show(HttpServletRequest request) {
-        try{
-            Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){
-                this.updateModel(request);          
-                return this.showAction(request);
-            }
-            else{
-                request.setAttribute("errores", errores);
-                return "/presentation/cliente/datos/View.jsp"; 
-            }            
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setAttribute("model", new ModelCuenta());
+
+        String viewUrl = "";
+        switch (request.getServletPath()) {
+            case "/presentation/cliente/cuenta/show":
+                viewUrl = this.show(request);
+                break;
         }
-        catch(Exception e){
-            return "/presentation/Error.jsp";             
-        }   
+        request.getRequestDispatcher(viewUrl).forward(request, response);
     }
 
-    Map<String,String> validar(HttpServletRequest request){
-        Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("numeroFld").isEmpty()){
-            errores.put("numeroFld","Cuenta requerida");
+    public String show(HttpServletRequest request) {
+        try {
+            Map<String, String> errores = this.validar(request);
+            if (errores.isEmpty()) {
+                this.updateModel(request);
+                return this.showAction(request);
+            } else {
+                request.setAttribute("errores", errores);
+                return "/presentation/cliente/datos/Datos.jsp";
+            }
+        } catch (Exception e) {
+            return "/presentation/Error.jsp";
+        }
+    }
+
+    Map<String, String> validar(HttpServletRequest request) {
+        Map<String, String> errores = new HashMap<>();
+        if (request.getParameter("numeroFld").isEmpty()) {
+            errores.put("numeroFld", "Cuenta requerida");
         }
         return errores;
     }
-    
-    void updateModel(HttpServletRequest request){
-       Bank.model.ModelCuenta model= (Bank.model.ModelCuenta) request.getAttribute("model");
-       
+
+    void updateModel(HttpServletRequest request) {
+        Bank.model.ModelCuenta model = (Bank.model.ModelCuenta) request.getAttribute("model");
+
         model.getCurrent().setNumero(request.getParameter("numeroFld"));
-   }    
-    
+    }
+
     public String showAction(HttpServletRequest request) {
         ModelCuenta model = (ModelCuenta) request.getAttribute("model");
         Bank.logic.Model domainModel = Bank.logic.Model.instance();
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        try {        
+        try {
             model.setCurrent(domainModel.cuentaFind(model.getCurrent().getNumero()));
-            if (!(model.getCurrent().getCliente().getCedula().equals(usuario.getCedula()))) 
+            if (!(model.getCurrent().getCliente().getCedula().equals(usuario.getCedula()))) {
                 throw new Exception("Cuenta no pertenece al cliente");
-            return "/presentation/cliente/cuenta/View.jsp";
+            }
+            return "/presentation/cliente/cuenta/Cuenta.jsp";
         } catch (Exception ex) {
             return "/presentation/Error.jsp";
         }
     }
-   
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -121,5 +118,5 @@ public class ControllerCuenta extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

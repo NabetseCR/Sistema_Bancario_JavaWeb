@@ -18,32 +18,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-@WebServlet(name = "ClienteDatosController", urlPatterns = {"/presentation/cliente/datos/show","/presentation/cliente/datos/update"})
+@WebServlet(name = "ClienteDatosController", urlPatterns = {"/presentation/cliente/datos/show", "/presentation/cliente/datos/update"})
 public class ControllerDatos extends HttpServlet {
-    
-  protected void processRequest(HttpServletRequest request, 
-                                HttpServletResponse response)
-         throws ServletException, IOException {
+
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
 
         request.setAttribute("model", new ModelDatos());
-        
-        String viewUrl="";     
+
+        String viewUrl = "";
         switch (request.getServletPath()) {
-          case "/presentation/cliente/datos/show":
-              viewUrl = this.show(request);
-              break;
-          case "/presentation/cliente/datos/update":
-              viewUrl = this.update(request);
-              break;              
-        }          
-        request.getRequestDispatcher(viewUrl).forward( request, response); 
-  }
+            case "/presentation/cliente/datos/show":
+                viewUrl = this.show(request);
+                break;
+            case "/presentation/cliente/datos/update":
+                viewUrl = this.update(request);
+                break;
+        }
+        request.getRequestDispatcher(viewUrl).forward(request, response);
+    }
 
     public String show(HttpServletRequest request) {
         return this.showAction(request);
     }
-    
+
     public String showAction(HttpServletRequest request) {
         ModelDatos model = (ModelDatos) request.getAttribute("model");
         Bank.logic.Model domainModel = Bank.logic.Model.instance();
@@ -52,54 +51,53 @@ public class ControllerDatos extends HttpServlet {
         Cliente cliente;
         try {
             cliente = domainModel.clienteFind(usuario);
-        } catch (Exception ex) { cliente=null; }
-        try {        
+        } catch (Exception ex) {
+            cliente = null;
+        }
+        try {
             model.setCurrent(cliente);
-            return "/presentation/cliente/datos/View.jsp";
-        } catch (Exception ex) { return ""; }
+            return "/presentation/cliente/datos/Datos.jsp";
+        } catch (Exception ex) {
+            return "";
+        }
     }
-    
-    
-    
-    private String update(HttpServletRequest request) { 
-        try{
+
+    private String update(HttpServletRequest request) {
+        try {
             ModelDatos model = (ModelDatos) request.getAttribute("model");
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             model.getCurrent().setCedula(usuario.getCedula());
-            Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){
-                this.updateModel(request);          
+            Map<String, String> errores = this.validar(request);
+            if (errores.isEmpty()) {
+                this.updateModel(request);
                 return this.updateAction(request);
-            }
-            else{
+            } else {
                 request.setAttribute("errores", errores);
-                return "/presentation/cliente/datos/View.jsp"; 
-            }            
+                return "/presentation/cliente/datos/Datos.jsp";
+            }
+        } catch (Exception e) {
+            return "/presentation/Error.jsp";
         }
-        catch(Exception e){
-            return "/presentation/Error.jsp";             
-        }         
     }
-    
-    Map<String,String> validar(HttpServletRequest request){
-        Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("nombreFld").isEmpty()){
-            errores.put("nombreFld","Nombre requerido");
+
+    Map<String, String> validar(HttpServletRequest request) {
+        Map<String, String> errores = new HashMap<>();
+        if (request.getParameter("nombreFld").isEmpty()) {
+            errores.put("nombreFld", "Nombre requerido");
         }
         return errores;
     }
-    
-    void updateModel(HttpServletRequest request){
-       Bank.model.ModelDatos model= (Bank.model.ModelDatos) request.getAttribute("model");
-       
-        model.getCurrent().setNombre(request.getParameter("nombreFld"));
-   }
 
-        
+    void updateModel(HttpServletRequest request) {
+        Bank.model.ModelDatos model = (Bank.model.ModelDatos) request.getAttribute("model");
+
+        model.getCurrent().setNombre(request.getParameter("nombreFld"));
+    }
+
     public String updateAction(HttpServletRequest request) {
-        Bank.model.ModelDatos model= (Bank.model.ModelDatos) request.getAttribute("model");
-        Bank.logic.Model  domainModel = Bank.logic.Model.instance();
+        Bank.model.ModelDatos model = (Bank.model.ModelDatos) request.getAttribute("model");
+        Bank.logic.Model domainModel = Bank.logic.Model.instance();
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         model.getCurrent().setCedula(usuario.getCedula());
@@ -108,14 +106,13 @@ public class ControllerDatos extends HttpServlet {
             domainModel.clienteUpdate(model.getCurrent());
             return "/presentation/Index.jsp";
         } catch (Exception ex) {
-            Map<String,String> errores = new HashMap<>();
+            Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("nombreFld","cedula o nombreincorrectos");
-            return "/presentation/cliente/datos/View.jsp"; 
-        }        
-    }   
-   
-   
+            errores.put("nombreFld", "cedula o nombreincorrectos");
+            return "/presentation/cliente/datos/Datos.jsp";
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -154,5 +151,5 @@ public class ControllerDatos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

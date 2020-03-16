@@ -53,7 +53,7 @@ public class ControllerCuentas extends HttpServlet {
         }
         try {        
             model.setCuentas(domainModel.cuentasFind(cliente));
-            return "/presentation/cliente/cuentas/View.jsp";
+            return "/presentation/cliente/cuentas/Cuentas.jsp";
         } catch (Exception ex) {
             return "";
         }
