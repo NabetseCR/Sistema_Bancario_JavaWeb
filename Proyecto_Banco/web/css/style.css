@@ -2,7 +2,7 @@
 
 .navbar{
     margin-bottom: 0;
-    background:orange;
+    background:grey;
 }
 
 .jumbotron{
@@ -11,11 +11,7 @@
 }
 
 .dropdown-menu{
-    background:orange
-}
-
-.colosh{
-    color:white !important;
+    background:none;
 }
 
 footer {
@@ -23,21 +19,9 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgb(42, 47, 53);
-    color: rgb(255, 105, 45);
+    background-color: black;
+    color: white;
     text-align: center;
-}
-
-.logo>img{ 
-    margin-top: 10px; 
-    height: 40px;
-    width: auto;
-}
-
-.logo>span{
-    font-family:  cursive; 
-    font-size: 2em;
-    color: rgb(255, 105, 45)
 }
 
 body{
@@ -45,25 +29,6 @@ body{
     background-position: center;
     background-size: cover;
 }
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid gray;
-}
-
-tr:hover {background-color:#f5f5f5;}
-
-.panel{width:100%;margin: auto; margin-top: 5px; border: 3px solid gray;  padding: 10px;}
-.fila{width:100%}
-.encabezado{background-color: black; color:rgb(255, 105, 45); text-align:center; font-size: 1.5em;}
-.etiqueta{width:20%;display:inline-block}
-.campo{width:60%;padding: 5px;display:inline-block}
 
 input[type=text].is-invalid,input[type=password].is-invalid{
     border-color: #dc3545;
@@ -74,10 +39,6 @@ input[type=text].is-invalid,input[type=password].is-invalid{
     background-image: url("../img/is-invalid.png");    
 }
 
-.link-button { 
-    background: none;
-    border: none;
-    color: #0066ff;
-    text-decoration: underline;
-    cursor: pointer; 
+.letras{
+    color:black;
 }
