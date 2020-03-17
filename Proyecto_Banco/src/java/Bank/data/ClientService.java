@@ -11,6 +11,7 @@ import Bank.logic.BankClient;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 /**
@@ -146,63 +147,58 @@ public class ClientService extends DBConnection {
         insertClient(client);
         insertClientAccount(client);
     }
-//    
-//    public ArrayList consultarAvionIdentificador(String identificadorp) throws GlobalException, NoDataException {
-//        try {
-//            conectar();
-//        } catch (ClassNotFoundException ex) {
-//            throw new GlobalException("No se ha localizado el Driver");
-//        } catch (SQLException e) {
-//            throw new NoDataException("La base de datos no se encuentra disponible");
-//        }
-//
-//        ResultSet rs = null;
-//        ArrayList<Avion> coleccion = new ArrayList<>();
-//        Avion avion = null;
-//        CallableStatement pstmt = null;
-//        try {
-//            pstmt = conexion.prepareCall(CONSULTARAVIONID);
-//            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
-//            pstmt.setString(2, identificadorp);
-//            pstmt.execute();
-//            rs = (ResultSet) pstmt.getObject(1);
-//            while (rs.next()) {
-//                avion = new Avion(
-//                        rs.getString("identificador"),
-//                        rs.getString("annio"),
-//                        rs.getString("modelo"),
-//                        rs.getString("marca"),
-//                        rs.getInt("cantidad_pasajeros"),
-//                        rs.getInt("cantidad_filas"),
-//                        rs.getInt("asientos_fila"),
-//                        rs.getString("tipo"));
-//                coleccion.add(avion);
-//            }
-//            for (Avion e : coleccion) {
-//                System.out.println(e.toString());
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//
-//            throw new GlobalException("Sentencia no valida");
-//        } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//                desconectar();
-//            } catch (SQLException e) {
-//                throw new GlobalException("Estatutos invalidos o nulos");
-//            }
-//        }
-//        if (coleccion == null || coleccion.size() == 0) {
-//            throw new NoDataException("No hay datos");
-//        }
-//        return coleccion;
-//    }
+    
+    public ArrayList consultarPersonaID(int _id) throws GlobalException, NoDataException {
+        try {
+            connect();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+
+        ResultSet rs = null;
+        ArrayList<BankClient> collection = new ArrayList<>();
+        BankClient client = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = connection.prepareCall(LISTPERSON);
+            //pstmt.registerOutParameter(1, Types.INTEGER);
+            pstmt.setInt(1, _id);
+            //pstmt.execute();
+            
+            boolean hadResults = pstmt.execute();
+            while (hadResults) {
+                rs = pstmt.getResultSet();
+ 
+                // process result set
+                while (rs.next()) {
+                    client = new BankClient(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("primer_apelido"),
+                        rs.getString("segundo_apellido"),
+                        rs.getString("estado_civil"),
+                        rs.getString("provincia"),
+                        rs.getString("canton"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getString("celular"),
+                        rs.getString("email"),
+                        rs.getInt("edad"));
+                collection.add(client);
+                }
+ 
+                hadResults = pstmt.getMoreResults();
+            }
+ 
+            pstmt.close();
+ 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+        return collection;
+    }
       
     //------------------------- FIN DE CRUD ---------------------------------------------------
     //Atributos
@@ -210,6 +206,8 @@ public class ClientService extends DBConnection {
     private static final String INSERTPERSON = "{call insertarPersona(?,?,?,?,?,?,?,?,?,?,?,?)}";
     private static final String INSERTCLIENT = "{call insertarCliente(?)}";
     private static final String INSERTCLIENTACCOUNT = "{call insertarCuentaCliente(?,?)}";
+    //private static final String LISTPERSON = "{?=call listaPersona(?)}";
+    private static final String LISTPERSON = "{call listaPersona(?)}";
     
     //Singleton
     private static ClientService instance = null;

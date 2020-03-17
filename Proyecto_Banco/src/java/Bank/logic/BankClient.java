@@ -41,6 +41,24 @@ public class BankClient {
         this.password = password;
     }
 
+    //Constructor para Consultar personas
+
+    public BankClient(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age) {
+        this.id = id;
+        this.name = name;
+        this.first_surname = first_surname;
+        this.second_surname = second_surname;
+        this.marital_status = marital_status;
+        this.city = city;
+        this.place = place;
+        this.address = address;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.email = email;
+        this.age = age;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -162,4 +180,11 @@ public class BankClient {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "BankClient{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + '}';
+    }
+    
+    
 }
