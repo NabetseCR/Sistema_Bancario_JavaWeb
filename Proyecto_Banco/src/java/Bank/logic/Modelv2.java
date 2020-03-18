@@ -37,19 +37,55 @@ public class Modelv2 {
     private Modelv2(){
         clients = new ArrayList();
         accounts = new ArrayList();
+        tellers = new ArrayList();
         service = new BankService();
     }
     
     
-//    public BankClient clientFind(String cedula,String clave) throws Exception{
-//        if (usuarios.get(cedula)!=null) return usuarios.get(cedula);
-//        else throw new Exception("Usuario no existe");
-//    }
-//
-//    public Cliente clienteFind(Usuario usuario) throws Exception{
-//        if (clientes.get(usuario.getCedula())!=null) return clientes.get(usuario.getCedula());
-//        else throw new Exception("Cliente no existe");
-//    }    
+    public BankClient clientFind(int cedula, String password) throws Exception{
+        clients = service.getClients();
+        int aux = 0;
+        for(int i = 0; i < clients.size(); i++){
+            if(clients.get(i).getId() == cedula && clients.get(i).getPassword().equals(password)){
+                aux = i;
+            } 
+        }
+        return clients.get(aux);
+    }
+    
+    public BankClient clientFind(BankClient usuario) throws Exception{
+        clients = service.getClients();
+        int aux = 0;
+        for(int i = 0; i < clients.size(); i++){
+            if(clients.get(i).equals(usuario)){
+                aux = i;
+            } 
+        }
+        return clients.get(aux);
+    } 
+    
+    public BankTeller tellerFind(int cedula, String password) throws Exception{
+        tellers = service.getTellers();
+        int aux = 0;
+        for(int i = 0; i < tellers.size(); i++){
+            if(tellers.get(i).getId() == cedula && tellers.get(i).getPassword().equals(password)){
+                aux = i;
+            } 
+        }
+        return tellers.get(aux);
+    }
+    
+    public BankTeller tellerFind(BankTeller usuario) throws Exception{
+        tellers = service.getTellers();
+        int aux = 0;
+        for(int i = 0; i < tellers.size(); i++){
+            if(tellers.get(i).equals(usuario)){
+                aux = i;
+            } 
+        }
+        return tellers.get(aux);
+    } 
+    
 //    public List<Cuenta> cuentasFind(Cliente cliente) throws Exception{
 //        List<Cuenta> result = new ArrayList();
 //        for(Cuenta c: cuentas.values()){

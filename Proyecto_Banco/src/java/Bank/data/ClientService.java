@@ -198,6 +198,59 @@ public class ClientService extends DBConnection {
         } 
         return collection;
     }
+    
+    public ArrayList clientesTotales() throws GlobalException, NoDataException {
+        try {
+            connect();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+
+        ResultSet rs = null;
+        ArrayList<BankClient> collection = new ArrayList<>();
+        BankClient client = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = connection.prepareCall(LISTUSERPERSON);
+            //pstmt.registerOutParameter(1, Types.INTEGER);
+            //pstmt.setInt(1, _id);
+            //pstmt.execute();
+            
+            boolean hadResults = pstmt.execute();
+            while (hadResults) {
+                rs = pstmt.getResultSet();
+ 
+                // process result set
+                while (rs.next()) {
+                    client = new BankClient(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("primer_apelido"),
+                        rs.getString("segundo_apellido"),
+                        rs.getString("estado_civil"),
+                        rs.getString("provincia"),
+                        rs.getString("canton"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getString("celular"),
+                        rs.getString("email"),
+                        rs.getInt("edad"),
+                        rs.getString("clave"));
+                collection.add(client);
+                }
+ 
+                hadResults = pstmt.getMoreResults();
+            }
+ 
+            pstmt.close();
+ 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+        return collection;
+    }
       
     //------------------------- FIN DE CRUD ---------------------------------------------------
     //Atributos
@@ -207,6 +260,7 @@ public class ClientService extends DBConnection {
     private static final String INSERTCLIENTACCOUNT = "{call insertarCuentaCliente(?,?)}";
     //private static final String LISTPERSON = "{?=call listaPersona(?)}";
     private static final String LISTPERSON = "{call listaPersona(?)}";
+    private static final String LISTUSERPERSON = "{call listaClientesTotales()}";
     
     //Singleton
     private static ClientService instance = null;

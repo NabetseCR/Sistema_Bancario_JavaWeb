@@ -183,7 +183,7 @@ public class BankClient {
 
     @Override
     public String toString() {
-        return "BankClient{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + '}';
+        return "BankClient{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + ", password=" + password +'}';
     }
     
     

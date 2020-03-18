@@ -188,6 +188,6 @@ public class BankTeller {
 
     @Override
     public String toString() {
-        return "BankTeller{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + '}';
+        return "BankTeller{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + ", password=" + password +'}';
     }
 }

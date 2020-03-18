@@ -5,6 +5,12 @@
  */
 package Bank.data;
 
+import Bank.exceptions.GlobalException;
+import Bank.exceptions.NoDataException;
+import Bank.logic.BankClient;
+import Bank.logic.BankTeller;
+import java.util.ArrayList;
+
 /**
  *
  * @author chinc
@@ -22,6 +28,14 @@ public class BankService {
         }
         return instance;
         
+    }
+    
+    public ArrayList<BankClient> getClients() throws GlobalException, NoDataException{
+        return clientService.clientesTotales();
+    }
+    
+    public ArrayList<BankTeller> getTellers() throws GlobalException, NoDataException{
+        return tellerService.cajerosTotales();
     }
     
     //Singleton
