@@ -17,22 +17,15 @@ import java.util.ArrayList;
  *
  * @author chinc
  */
-public class TellerService extends DBConnection {
+public class TellerService extends Service {
+
+    private static final String LISTPERSON = "{call listaPersona(?)}";
+    private static final String LISTTELLER = "{call listaCajerosTotales()}";
+
     public TellerService() {
-        
+
     }
-    
-    public static TellerService getInstance() {
-        if (instance == null) {
-            instance= new TellerService();
-        }
-        return instance;
-    }
-    
-    //------------------------ PARTE DEL CRUD --------------------------------------------------
-    // No necesario insertar o diferentes cosas, este serivicio solo servira como apoyo a login siendo cajero
-    
-    // Ver si persona esta
+
     public ArrayList consultarPersonaID(int _id) throws GlobalException, NoDataException {
         try {
             connect();
@@ -51,40 +44,40 @@ public class TellerService extends DBConnection {
             //pstmt.registerOutParameter(1, Types.INTEGER);
             pstmt.setInt(1, _id);
             //pstmt.execute();
-            
+
             boolean hadResults = pstmt.execute();
             while (hadResults) {
                 rs = pstmt.getResultSet();
- 
+
                 // process result set
                 while (rs.next()) {
                     client = new BankTeller(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("primer_apelido"),
-                        rs.getString("segundo_apellido"),
-                        rs.getString("estado_civil"),
-                        rs.getString("provincia"),
-                        rs.getString("canton"),
-                        rs.getString("direccion"),
-                        rs.getString("telefono"),
-                        rs.getString("celular"),
-                        rs.getString("email"),
-                        rs.getInt("edad"));
-                collection.add(client);
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("primer_apelido"),
+                            rs.getString("segundo_apellido"),
+                            rs.getString("estado_civil"),
+                            rs.getString("provincia"),
+                            rs.getString("canton"),
+                            rs.getString("direccion"),
+                            rs.getString("telefono"),
+                            rs.getString("celular"),
+                            rs.getString("email"),
+                            rs.getInt("edad"));
+                    collection.add(client);
                 }
- 
+
                 hadResults = pstmt.getMoreResults();
             }
- 
+
             pstmt.close();
- 
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return collection;
     }
-    
+
     public ArrayList cajerosTotales() throws GlobalException, NoDataException {
         try {
             connect();
@@ -103,48 +96,38 @@ public class TellerService extends DBConnection {
             //pstmt.registerOutParameter(1, Types.INTEGER);
             //pstmt.setInt(1, _id);
             //pstmt.execute();
-            
+
             boolean hadResults = pstmt.execute();
             while (hadResults) {
                 rs = pstmt.getResultSet();
- 
+
                 // process result set
                 while (rs.next()) {
                     client = new BankTeller(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("primer_apelido"),
-                        rs.getString("segundo_apellido"),
-                        rs.getString("estado_civil"),
-                        rs.getString("provincia"),
-                        rs.getString("canton"),
-                        rs.getString("direccion"),
-                        rs.getString("telefono"),
-                        rs.getString("celular"),
-                        rs.getString("email"),
-                        rs.getInt("edad"),
-                        rs.getString("clave"));
-                collection.add(client);
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("primer_apelido"),
+                            rs.getString("segundo_apellido"),
+                            rs.getString("estado_civil"),
+                            rs.getString("provincia"),
+                            rs.getString("canton"),
+                            rs.getString("direccion"),
+                            rs.getString("telefono"),
+                            rs.getString("celular"),
+                            rs.getString("email"),
+                            rs.getInt("edad"),
+                            rs.getString("clave"));
+                    collection.add(client);
                 }
- 
+
                 hadResults = pstmt.getMoreResults();
             }
- 
+
             pstmt.close();
- 
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return collection;
     }
-    
-    //Ayuda a verificar contrasenna
-    
-      
-    //------------------------- FIN DE CRUD ---------------------------------------------------
-    //Atributos
-    private static final String LISTPERSON = "{call listaPersona(?)}";
-    private static final String LISTTELLER = "{call listaCajerosTotales()}";
-    //Singleton
-    private static TellerService instance = null;
 }

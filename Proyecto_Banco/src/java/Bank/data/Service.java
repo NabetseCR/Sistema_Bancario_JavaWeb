@@ -13,10 +13,10 @@ import java.sql.SQLException;
  *
  * @author chinc
  */
-public class DBConnection {
+public class Service {
     protected Connection connection = null;
 
-    public DBConnection() {
+    public Service() {
 
     }
 
