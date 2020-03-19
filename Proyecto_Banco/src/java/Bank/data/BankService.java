@@ -7,6 +7,7 @@ package Bank.data;
 
 import Bank.exceptions.GlobalException;
 import Bank.exceptions.NoDataException;
+import Bank.logic.BankAccount;
 import Bank.logic.BankClient;
 import Bank.logic.BankTeller;
 import java.util.ArrayList;
@@ -36,6 +37,14 @@ public class BankService {
     
     public ArrayList<BankTeller> getTellers() throws GlobalException, NoDataException{
         return tellerService.cajerosTotales();
+    }
+    
+    public ArrayList<BankAccount> getAccountID(int id) throws GlobalException, NoDataException{
+        return accountService.searchBankAccountID(id);
+    }
+    
+    public BankAccount getAccountNumb(int numb) throws GlobalException, NoDataException{
+        return accountService.searchBankAccountNumb(numb).get(0);
     }
     
     //Singleton

@@ -86,34 +86,15 @@ public class Modelv2 {
         return tellers.get(aux);
     } 
     
-//    public List<Cuenta> cuentasFind(Cliente cliente) throws Exception{
-//        List<Cuenta> result = new ArrayList();
-//        for(Cuenta c: cuentas.values()){
-//            if(c.getCliente().equals(cliente)){
-//                result.add(c);
-//            }
-//        }
-//        return result;
+    public ArrayList<BankAccount> cuentasFind(BankClient cliente) throws Exception{
+        return service.getAccountID(cliente.getId());
+    }
+    
+//    public ArrayList<BankAccount> favoritasFind(BankClient cliente) throws Exception{
+//        
 //    }
-//    
-//    public List<Cuenta> favoritasFind(Cliente cliente) throws Exception{
-//        List<Cuenta> result = new ArrayList();
-//        for(String nc: favoritas.get(cliente.getCedula())){
-//                result.add(cuentas.get(nc));
-//        }
-//        return result;
-//    }
-//
-//    public void clienteUpdate(Cliente cliente) throws Exception{
-//        if (clientes.get(cliente.getCedula())==null) 
-//            throw new Exception("Cliente no existe");
-//        else{
-//            clientes.get(cliente.getCedula()).setNombre(cliente.getNombre());
-//        }
-//    }
-//    
-//    public Cuenta cuentaFind(String numero) throws Exception{
-//        if (cuentas.get(numero)!=null) return cuentas.get(numero);
-//        else throw new Exception("Cuenta no existe");
-//    }   
+  
+    public BankAccount cuentaFind(int numero) throws Exception{
+        return service.getAccountNumb(numero);
+    }   
 }

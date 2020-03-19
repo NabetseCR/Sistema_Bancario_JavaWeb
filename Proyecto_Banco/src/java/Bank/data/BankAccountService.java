@@ -184,7 +184,7 @@ public class BankAccountService extends DBConnection {
         return collection;
     }
     
-    public ArrayList searchBankAccountNumb(int _numb) throws GlobalException, NoDataException {
+    public ArrayList<BankAccount> searchBankAccountNumb(int _numb) throws GlobalException, NoDataException {
         try {
             connect();
         } catch (ClassNotFoundException ex) {
