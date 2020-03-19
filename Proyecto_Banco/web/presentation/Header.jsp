@@ -37,8 +37,10 @@
                     <% if (usuario == null) {%>
                     <li>
                         <a href="/Proyecto_Banco/presentation/login/show">Login</a>
-                    </li>                
-                    <% }%>             
+
+                    </li>   
+                    <li><a href="/Proyecto_Banco/presentation/registro/show">Registro</a></li>
+                        <% }%>             
                     </li>
                 </ul>
 
