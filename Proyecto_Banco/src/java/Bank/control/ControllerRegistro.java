@@ -1,6 +1,5 @@
 package Bank.control;
 
-import Bank.model.ModelLogin;
 import Bank.model.ModelRegistro;
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "RegistroController", urlPatterns = {"/presentation/Registro/show", "/presentation/Registro"})
 public class ControllerRegistro extends HttpServlet{
@@ -62,7 +60,7 @@ public class ControllerRegistro extends HttpServlet{
     }
 
     void updateModel(HttpServletRequest request) {
-        ModelLogin model = (ModelLogin) request.getAttribute("model");
+        ModelRegistro model = (ModelRegistro) request.getAttribute("model");
         String id = request.getParameter("id");
         String nom = request.getParameter("nombre");
         String ape1 = request.getParameter("apellido1");

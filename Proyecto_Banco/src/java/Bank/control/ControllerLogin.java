@@ -44,7 +44,7 @@ public class ControllerLogin extends HttpServlet {
                 return this.loginAction(request);
             } else {
                 request.setAttribute("errores", errores);
-                return "/presentation/login/View.jsp";
+                return "/presentation/login/Login.jsp";
             }
         } catch (Exception e) {
             return "/presentation/Error.jsp";

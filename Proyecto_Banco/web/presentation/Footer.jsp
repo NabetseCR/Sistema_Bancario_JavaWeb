@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-6">
-                <p class="colosh">Pepe Figueres</p>
+                <p class="colosh">ICBC</p>
             </div>
             <div class="col-xs-6">
                 <ul class="list-inline text-right">
@@ -12,4 +12,6 @@
             </div>
         </div>
     </div>
+    <script src="/Proyecto_Banco/js/jquery.js"></script>
+    <script src="/Proyecto_Banco/js/bootstrap.js"></script>
 </footer>

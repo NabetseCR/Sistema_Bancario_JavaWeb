@@ -60,6 +60,7 @@
                 </table>
             </form> 
         </div>
+        <%@ include file="/presentation/Footer.jsp" %>
     </body>
 
 </html>

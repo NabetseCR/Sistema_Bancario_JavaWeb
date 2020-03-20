@@ -15,7 +15,7 @@
     </head>
     <body >
         <%@ include file="/presentation/Header.jsp" %>
-
+        
         <div class="panel" style="width:50%;">
             <div class="fila encabezado">Cuenta</div>
             <div class="fila">

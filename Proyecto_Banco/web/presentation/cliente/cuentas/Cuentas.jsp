@@ -16,14 +16,16 @@
     <body >
         <%@ include file="/presentation/Header.jsp" %>
 
-        <div style="width:50%;margin:auto;">
-            <h1>Listado de Cuentas del Cliente</h1>     
+        <div>
 
-            <table>
+
+            <table class="table" style="border:1px solid black;margin-left:auto;margin-right:auto; width: 50%">
                 <thead>
-                    <tr> <td>Numero</td> <td>Saldo</td>  </tr>
+                <td colspan="2"><h1 class="colosh2">Listado de Cuentas del Cliente</h1></td>   
+
                 </thead>
                 <tbody>
+                    <tr> <td>Numero</td> <td>Saldo</td>  </tr>
                     <% for (Cuenta c : cuentas) {%>
                     <tr> <td><a href="/Proyecto_Banco/presentation/cliente/cuenta/show?numeroFld=<%=c.getNumero()%>"><%=c.getNumero()%> </td>  
                         <td><%=c.getSaldo()%></td></tr> 
