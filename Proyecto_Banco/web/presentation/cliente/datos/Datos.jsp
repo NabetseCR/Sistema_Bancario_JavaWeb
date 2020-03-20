@@ -6,6 +6,7 @@
 <html>
     <head>
         <%@ include file="/presentation/Head.jsp" %>
+        <title>Datos Personales</title>
     </head>
     <body >
 
@@ -14,21 +15,24 @@
         <% ModelDatos model = (ModelDatos) request.getAttribute("model"); %>
         <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
         <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
+      
+        <form name="form" action="/Proyecto_Banco/presentation/cliente/datos/update" method="post" >
+            <div>
+                <table class="table" style="border:1px solid black;margin-left:auto;margin-right:auto; width: 50%">
+                    <thead>
+                    <td colspan="2"><h1 class="colosh2">Datos</h1></td>   
+                    </thead>
+                    <tbody>
+                        <tr><td>Cedula</td> <td>Nombre</td></tr>
 
-        <form name="form" action="/Proyecto_Banco/presentation/cliente/datos/update" method="post" > 
-            <div class="panel" style="width:30%;">
-                <div class="fila encabezado">Datos</div>
-                <div class="fila">
-                    <div class="etiqueta">Cedula</div>
-                    <div class="campo"><%=model.getCurrent().getCedula()%></div>
-                </div>
-                <div class="fila">
-                    <div class="etiqueta">Nombre</div>
-                    <div class="campo"><input class="<%=erroneo("nombreFld", errores)%>" placeholder="Nombre del usuario" type="text" name="nombreFld" value="<%=form.get("nombreFld")[0]%>" title="<%=title("nombreFld", errores)%>"></div>
-                </div>
-                <div class="fila encabezado"><button  style="margin-bottom: 15px">Actualzar</button> </div>
+                        <tr><td><%=model.getCurrent().getCedula()%></td> 
+                            <td><input class="<%=erroneo("nombreFld", errores)%>" placeholder="Nombre del usuario" type="text" name="nombreFld" value="<%=form.get("nombreFld")[0]%>" title="<%=title("nombreFld", errores)%>"></td></tr>
+                        <tr><td><button  style="margin-bottom: 15px">Actualizar</button></td></tr>
+                    </tbody>
+                </table> 
             </div>
         </form>
+        
         <%@ include file="/presentation/Footer.jsp" %>                  
     </body>
 </html>

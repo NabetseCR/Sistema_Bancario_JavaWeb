@@ -17,7 +17,7 @@
                         <ul>  <!--submenu --> </ul>
                     </li>                        
                     <li >
-                        <a  href="#" class="colosh">User: <%=usuario.getCedula()%></a>
+                        <a  href="/Proyecto_Banco/presentation/cliente/datos/show" class="colosh">User: <%=usuario.getCedula()%></a>
                         <ul>  <!--submenu --> </ul>
                     </li> 
                     <li class="dropdown">
