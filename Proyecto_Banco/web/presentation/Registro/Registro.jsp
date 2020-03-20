@@ -13,7 +13,7 @@
 
         <div class="a"><font id="fontelem" color=black face="arial,verdana" size="4"><b>Registro</b></font>&nbsp;</div>
         <div style="width:50%; margin:auto;">
-            <form name="form" action="" method="post">
+            <form name="form" action="/Proyecto_Banco/presentation/registro" method="post">
                 <table  class="table letras">
                     <tr>
                         <td colspan="2" bgcolor="Black"><font id="fontelem" color=white face="arial,verdana" size="3">Información Personal</font></td>
