@@ -46,36 +46,11 @@ public class Modelv2 {
         return users.get(aux);
     } 
     
-//    public BankTeller tellerFind(int cedula, String password) throws Exception{
-//        tellers = DAO.getInstance().listarCajeros();
-//        int aux = 0;
-//        for(int i = 0; i < tellers.size(); i++){
-//            if(tellers.get(i).getId() == cedula && tellers.get(i).getPassword().equals(password)){
-//                aux = i;
-//            } 
-//        }
-//        return tellers.get(aux);
-//    }
-//    
-//    public BankTeller tellerFind(BankTeller usuario) throws Exception{
-//        tellers = DAO.getInstance().listarCajeros();
-//        int aux = 0;
-//        for(int i = 0; i < tellers.size(); i++){
-//            if(tellers.get(i).equals(usuario)){
-//                aux = i;
-//            } 
-//        }
-//        return tellers.get(aux);
-//    } 
-    
     public ArrayList<BankAccount> cuentasFind(BankUser cliente) throws Exception{
         accounts = DAO.getInstance().consultarCuentasID(cliente.getId());
         return  accounts;
     }
-    
-//    public ArrayList<BankAccount> favoritasFind(BankClient cliente) throws Exception{
-//        
-//    }
+
   
     public BankAccount cuentaFind(int numero) throws Exception{
         return DAO.getInstance().consultarCuentasNumero(numero).get(numero);
