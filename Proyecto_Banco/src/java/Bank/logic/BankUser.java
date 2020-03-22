@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Bank.logic;
 
 import java.util.Objects;
@@ -11,8 +6,8 @@ import java.util.Objects;
  *
  * @author chinc
  */
-// Esta clase es igual a BankTeller simplemente se utiliza para distincion en login
-public class BankTeller {
+public class BankUser {
+    
     int id;
     String name;
     String first_surname;
@@ -26,11 +21,13 @@ public class BankTeller {
     String email;
     int age;
     String password;
+    int type;
 
-    public BankTeller() {
+    public BankUser() {
     }
 
-    public BankTeller(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age, String password) {
+    //Constructor Completo
+    public BankUser(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age, String password, int type) {
         this.id = id;
         this.name = name;
         this.first_surname = first_surname;
@@ -44,11 +41,11 @@ public class BankTeller {
         this.email = email;
         this.age = age;
         this.password = password;
+        this.type = type;
     }
 
     //Constructor para Consultar personas
-
-    public BankTeller(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age) {
+    public BankUser(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age, String password) {
         this.id = id;
         this.name = name;
         this.first_surname = first_surname;
@@ -61,6 +58,7 @@ public class BankTeller {
         this.cellphone = cellphone;
         this.email = email;
         this.age = age;
+        this.password = password;
     }
     
     
@@ -167,6 +165,16 @@ public class BankTeller {
     public void setPlace(String place) {
         this.place = place;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    
+    
     
     @Override
     public boolean equals(Object obj) {
@@ -179,7 +187,7 @@ public class BankTeller {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final BankTeller other = (BankTeller) obj;
+        final BankUser other = (BankUser) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -188,6 +196,8 @@ public class BankTeller {
 
     @Override
     public String toString() {
-        return "BankTeller{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + ", password=" + password +'}';
+        return "BankClient{" + "id=" + id + ", name=" + name + ", first_surname=" + first_surname + ", second_surname=" + second_surname + ", marital_status=" + marital_status + ", city=" + city + ", place=" + place + ", address=" + address + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email + ", age=" + age + ", password=" + password +'}';
     }
+    
+    
 }

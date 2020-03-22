@@ -8,8 +8,7 @@ package Bank.data;
 import Bank.exceptions.GlobalException;
 import Bank.exceptions.NoDataException;
 import Bank.logic.BankAccount;
-import Bank.logic.BankClient;
-import Bank.logic.BankTeller;
+import Bank.logic.BankUser;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +20,7 @@ import java.util.logging.Logger;
 public class DAO {
 
     private static DAO mInstance;
-    private ArrayList<BankClient> clients;
-    private ArrayList<BankTeller> tellers;
+    private ArrayList<BankUser> clients;
     private ArrayList<BankAccount> accounts;
 
     public static DAO getInstance() {
@@ -34,34 +32,53 @@ public class DAO {
 
     private DAO() {
         clients = new ArrayList();
-        tellers = new ArrayList();
         accounts = new ArrayList();
     }
 
-    /*Clients*/
-    public void insertarCliente(BankClient e) {
-        ClientService se = new ClientService();
+    /*---------------  Modulo UserService ------------------*/
+    public void insertarCliente(BankUser e) {
+        UserService se = new UserService();
         try {
-            se.insertClientToDB(e);
+            se.insertarCliente(e);
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public ArrayList<BankClient> listarClientes() {
-        ClientService se = new ClientService();
+    public ArrayList<BankUser> listarClientes() {
+        UserService se = new UserService();
         try {
-            clients = se.clientesTotales();
+            clients = se.listarClientes();
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return clients;
     }
     
-    public ArrayList<BankClient> consultarClientesID(int id) {
-        ClientService se = new ClientService();
+    public ArrayList<BankUser> consultarClienteID(int id) {
+        UserService se = new UserService();
         try {
-            clients = se.consultarPersonaID(id);
+            clients = se.consultarClienteID(id);
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return clients;
+    }
+    
+    public ArrayList<BankUser> listarCajeros() {
+        UserService se = new UserService();
+        try {
+            clients = se.listarCajeros();
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return clients;
+    }
+    
+    public ArrayList<BankUser> consultarCajeroID(int id) {
+        UserService se = new UserService();
+        try {
+            clients = se.consultarCajeroID(id);
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,18 +86,7 @@ public class DAO {
     }
     
 
-    /*Tellers*/
-    public ArrayList<BankTeller> listarCajeros() {
-        TellerService se = new TellerService();
-        try {
-            tellers = se.cajerosTotales();
-        } catch (GlobalException | NoDataException ex) {
-            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return tellers;
-    }
-
-    /*Accounts*/
+    /*----------- Modulo BankAccountService ---------------------------*/
     public void insertarCuenta(BankAccount e) {
         BankAccountService se = new BankAccountService();
         try {
