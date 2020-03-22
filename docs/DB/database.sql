@@ -389,6 +389,34 @@ ADD COLUMN `porcentaje_interes` DECIMAL(10,3) NOT NULL AFTER `descripcion`;
     
     /*-------------------------------------------------------------------------------------*/
     
+    /*consultar clientes*/
+    DELIMITER //
+    CREATE PROCEDURE consultaClienteID(IN _id INT)
+    BEGIN
+		SELECT * FROM persona, cuenta_cliente WHERE persona.id = cuenta_cliente.cedula_cliente_usuario
+        AND persona.id = _id;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL consultaClienteID(111);
+    
+    /*-------------------------------------------------------------------------------------*/
+    
+    /*consultar clientes*/
+    DELIMITER //
+    CREATE PROCEDURE consultaCajeroID(IN _id INT)
+    BEGIN
+		SELECT * FROM persona, cuenta_cajero WHERE persona.id = cuenta_cajero.cedula_cajero_usuario
+        AND persona.id = _id;
+    END//
+    DELIMITER ;
+    
+    /*Llamo al procedimiento*/
+    CALL consultaCajeroID(111);
+    
+    /*-------------------------------------------------------------------------------------*/
+    
     /*Consulta Cuenta por numero*/
     DELIMITER //
     CREATE PROCEDURE consultaCuentaNumero(IN _numero INT)
