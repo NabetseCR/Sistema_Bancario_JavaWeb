@@ -21,7 +21,7 @@ public class BankAccountService extends Service {
 
     private static final String INSERTBANKACCOUNT = "{call insertarCuenta(?,?,?)}";
     private static final String LISTBANKACCOUNTNUMB = "{call listaCuenta(?)}";
-    private static final String LISTBANKACCOUNTID = "{call listaCuentaID(?)}";
+    private static final String LISTBANKACCOUNTID = "{call consultaCuentaID(?)}";
 
     public BankAccountService() {
 
