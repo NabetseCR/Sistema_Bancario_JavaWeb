@@ -21,30 +21,10 @@ public class BankUser {
     String email;
     int age;
     String password;
-    int type;
 
     public BankUser() {
     }
 
-    //Constructor Completo
-    public BankUser(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age, String password, int type) {
-        this.id = id;
-        this.name = name;
-        this.first_surname = first_surname;
-        this.second_surname = second_surname;
-        this.marital_status = marital_status;
-        this.city = city;
-        this.place = place;
-        this.address = address;
-        this.telephone = telephone;
-        this.cellphone = cellphone;
-        this.email = email;
-        this.age = age;
-        this.password = password;
-        this.type = type;
-    }
-
-    //Constructor para Consultar personas
     public BankUser(int id, String name, String first_surname, String second_surname, String marital_status, String city, String place, String address, String telephone, String cellphone, String email, int age, String password) {
         this.id = id;
         this.name = name;
@@ -60,8 +40,7 @@ public class BankUser {
         this.age = age;
         this.password = password;
     }
-    
-    
+        
     public int getId() {
         return id;
     }
@@ -166,13 +145,7 @@ public class BankUser {
         this.place = place;
     }
 
-    public int getType() {
-        return type;
-    }
 
-    public void setType(int type) {
-        this.type = type;
-    }
     
     
     
